@@ -1,0 +1,153 @@
+-- Variables
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create the Main GUI Frame
+local msexec = Instance.new("ScreenGui")
+msexec.Name = "msexec"
+msexec.Parent = playerGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(0, 0, 255)
+mainFrame.Parent = msexec
+
+-- Add Dragging Functionality for mainFrame
+local isDraggingMain = false
+local dragStartMain, startPosMain
+
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDraggingMain = true
+        dragStartMain = input.Position
+        startPosMain = mainFrame.Position
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if isDraggingMain and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStartMain
+        mainFrame.Position = UDim2.new(
+            startPosMain.X.Scale,
+            startPosMain.X.Offset + delta.X,
+            startPosMain.Y.Scale,
+            startPosMain.Y.Offset + delta.Y
+        )
+    end
+end)
+
+mainFrame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDraggingMain = false
+    end
+end)
+
+-- Add a Label
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 0, 30)
+label.Position = UDim2.new(0, 0, 0, 0)
+label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.SourceSans
+label.Text = "msexec"
+label.TextSize = 24
+label.Parent = mainFrame
+
+-- Add a TextBox
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0.9, 0, 0, 30)
+textBox.Position = UDim2.new(0.05, 0, 0.3, 0)
+textBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+textBox.Font = Enum.Font.SourceSans
+textBox.Text = ""
+textBox.PlaceholderText = "Enter code here"
+textBox.TextSize = 18
+textBox.Parent = mainFrame
+
+-- Add a Run Button
+local runButton = Instance.new("TextButton")
+runButton.Size = UDim2.new(0.4, 0, 0, 30)
+runButton.Position = UDim2.new(0.3, 0, 0.55, 0)
+runButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+runButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+runButton.Font = Enum.Font.SourceSans
+runButton.Text = "Run"
+runButton.TextSize = 18
+runButton.Parent = mainFrame
+
+-- Execute code on button click
+runButton.MouseButton1Click:Connect(function()
+    local code = textBox.Text
+    local func, err = loadstring(code)
+    if func then
+        func()
+    else
+        warn("Error: " .. err)
+    end
+end)
+
+-- Add Toggle Button (Bottom-Left Corner, further down)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0, 80, 0, 40) -- Smaller size
+toggleButton.Position = UDim2.new(0, 10, 1, -15) -- Moved further down
+toggleButton.AnchorPoint = Vector2.new(0, 1)
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggleButton.BorderSizePixel = 2
+toggleButton.BorderColor3 = Color3.fromRGB(0, 0, 255)
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.Font = Enum.Font.SourceSans
+toggleButton.Text = "Toggle"
+toggleButton.TextSize = 16
+toggleButton.Parent = msexec
+
+-- Toggle GUI visibility
+toggleButton.MouseButton1Click:Connect(function()
+    mainFrame.Visible = not mainFrame.Visible
+end)
+
+-- Add Dragging Functionality for toggleButton
+local isDraggingToggle = false
+local dragStartToggle, startPosToggle
+
+toggleButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDraggingToggle = true
+        dragStartToggle = input.Position
+        startPosToggle = toggleButton.Position
+    end
+end)
+
+toggleButton.InputChanged:Connect(function(input)
+    if isDraggingToggle and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStartToggle
+        toggleButton.Position = UDim2.new(
+            startPosToggle.X.Scale,
+            startPosToggle.X.Offset + delta.X,
+            startPosToggle.Y.Scale,
+            startPosToggle.Y.Offset + delta.Y
+        )
+    end
+end)
+
+toggleButton.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDraggingToggle = false
+    end
+end)
+
+-- Add Build Code Text
+local buildCodeLabel = Instance.new("TextLabel")
+buildCodeLabel.Size = UDim2.new(0, 100, 0, 20)
+buildCodeLabel.Position = UDim2.new(1, -105, 1, -25) -- Bottom-right corner
+buildCodeLabel.AnchorPoint = Vector2.new(1, 1)
+buildCodeLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+buildCodeLabel.BackgroundTransparency = 1
+buildCodeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+buildCodeLabel.Font = Enum.Font.SourceSans
+buildCodeLabel.Text = "Build Code 1"
+buildCodeLabel.TextSize = 12
+buildCodeLabel.Parent = mainFrame

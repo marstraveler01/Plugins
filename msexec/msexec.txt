@@ -89,6 +89,7 @@ runButton.MouseButton1Click:Connect(function()
         warn("Error: " .. err)
     end
 end)
+getgenv().Library:Notify("Executed", 3)
 
 -- Add Toggle Button (Bottom-Left Corner, further down)
 local toggleButton = Instance.new("TextButton")

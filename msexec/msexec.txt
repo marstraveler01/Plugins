@@ -16,7 +16,7 @@ mainFrame.BorderColor3 = Color3.fromRGB(0, 0, 255)
 mainFrame.Parent = msexec
 
 -- Add Dragging Functionality for mainFrame
-local isDraggingMain = false
+local isDraggingMain = true
 local dragStartMain, startPosMain
 
 mainFrame.InputBegan:Connect(function(input)
@@ -148,6 +148,6 @@ buildCodeLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 buildCodeLabel.BackgroundTransparency = 1
 buildCodeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 buildCodeLabel.Font = Enum.Font.SourceSans
-buildCodeLabel.Text = "Build Code 1"
+buildCodeLabel.Text = "Build 2"
 buildCodeLabel.TextSize = 12
 buildCodeLabel.Parent = mainFrame

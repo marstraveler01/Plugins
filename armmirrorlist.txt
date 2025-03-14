@@ -1,0 +1,16 @@
+dk.mirror.archlinuxarm.org
+de3.mirror.archlinuxarm.org
+de.mirror.archlinuxarm.org
+de4.mirror.archlinuxarm.org
+eu.mirror.archlinuxarm.org
+de5.mirror.archlinuxarm.org
+gr.mirror.archlinuxarm.org
+hu.mirror.archlinuxarm.org
+jp.mirror.archlinuxarm.org
+sg.mirror.archlinuxarm.org
+tw2.mirror.archlinuxarm.org
+uk.mirror.archlinuxarm.org
+ca.us.mirror.archlinuxarm.org
+nj.us.mirror.archlinuxarm.org
+tw.mirror.archlinuxarm.org
+fl.us.mirror.archlinuxarm.org

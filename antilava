@@ -1,0 +1,26 @@
+-- delete lava
+local function deleteObjects()
+    -- define paths to lava
+    local objectsToDelete = {
+        workspace.LavaArea.Lava,
+        workspace.LavaArea.LavaBottom,
+        workspace.LavaArea,
+        workspace.NewLobby["Lobby Building"].CenterStuff.Border
+    }
+    
+    -- attempt to delete lava
+    for i, object in ipairs(objectsToDelete) do
+        -- check if lava exists before trying to delete it
+        if object then
+            pcall(function()
+                object:Destroy()
+                print("Successfully deleted: " .. object:GetFullName())
+            end)
+        else
+            print("Object at index " .. i .. " doesn't exist or couldn't be found")
+        end
+    end
+end
+
+-- start lava delete
+deleteObjects()

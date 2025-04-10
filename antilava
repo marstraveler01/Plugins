@@ -24,3 +24,8 @@ end
 
 -- start lava delete
 deleteObjects()
+Library:Notify({
+    Title = "[antilava]",
+    Description = "deleted lava sucsessfully",
+    Time = 4,
+})
